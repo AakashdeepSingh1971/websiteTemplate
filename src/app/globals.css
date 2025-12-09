@@ -1,26 +1,135 @@
-@import "tailwindcss";
+@import "tw-animate-css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+/* Enable dark mode as class */
+@custom-variant dark (&:is(.dark *));
+
+/* @tailwind base;
+@tailwind components;
+@tailwind utilities; */
+/*
+Source - https://stackoverflow.com/a
+Posted by AviFS
+Retrieved 2025-12-09, License - CC BY-SA 4.0
+*/
+
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
+/* -------------------------------------------------------------------------- */
+/*                                  THEME ROOT                                */
+/* -------------------------------------------------------------------------- */
+
+@layer base {
+	:root {
+		/* Colors (HSL Theme) */
+		--background: 263 46% 18%;
+		--foreground: 0 0% 100%;
+		--card: 263 46% 20%;
+		--card-foreground: 0 0% 100%;
+		--popover: 263 46% 18%;
+		--popover-foreground: 0 0% 100%;
+
+		--primary: 296 72% 63%;
+		--primary-foreground: 0 0% 100%;
+
+		--secondary: 265 55% 45%;
+		--secondary-foreground: 0 0% 100%;
+
+		--accent: 276 65% 58%;
+		--accent-foreground: 0 0% 100%;
+
+		--muted: 263 30% 25%;
+		--muted-foreground: 250 10% 70%;
+
+		--destructive: 0 84% 60%;
+		--destructive-foreground: 0 0% 100%;
+
+		--border: 250 10% 30%;
+		--input: 250 10% 30%;
+		--ring: 296 72% 63%;
+		--radius: 1rem;
+
+		/* Sidebar */
+		--sidebar-background: 263 46% 16%;
+		--sidebar-foreground: 0 0% 100%;
+		--sidebar-primary: 296 72% 63%;
+		--sidebar-primary-foreground: 0 0% 100%;
+		--sidebar-accent: 265 55% 45%;
+		--sidebar-accent-foreground: 0 0% 100%;
+		--sidebar-border: 250 10% 30%;
+		--sidebar-ring: 296 72% 63%;
+	}
 }
+
+/* --------------------------------- DARK MODE ------------------------------ */
+
+@layer base {
+	.dark {
+		--background: 263 40% 10%;
+		--foreground: 0 0% 95%;
+		--card: 263 40% 12%;
+		--card-foreground: 0 0% 95%;
+		--popover: 263 40% 10%;
+		--popover-foreground: 0 0% 95%;
+		--primary: 296 72% 70%;
+		--primary-foreground: 263 40% 10%;
+		--secondary: 296 40% 35%;
+		--secondary-foreground: 0 0% 95%;
+		--accent: 276 45% 40%;
+		--accent-foreground: 0 0% 95%;
+		--muted: 250 10% 25%;
+		--muted-foreground: 0 0% 80%;
+		--destructive: 0 63% 31%;
+		--border: 250 10% 20%;
+		--input: 250 10% 20%;
+		--ring: 296 72% 70%;
+
+		/* Sidebar dark */
+		--sidebar-background: 263 40% 10%;
+		--sidebar-foreground: 0 0% 95%;
+		--sidebar-primary: 296 72% 70%;
+		--sidebar-primary-foreground: 263 40% 10%;
+		--sidebar-accent: 265 55% 45%;
+		--sidebar-accent-foreground: 0 0% 95%;
+		--sidebar-border: 250 10% 20%;
+		--sidebar-ring: 296 72% 70%;
+	}
+}
+
+/* ------------------------------- GLOBAL RESETS ---------------------------- */
+
+@layer base {
+	* {
+		@apply border-border;
+	}
+
+	body {
+		@apply bg-background text-foreground;
+	}
+}
+
+/* ------------------------------ UTILITIES -------------------------------- */
+
+@layer utilities {
+	.text-gradient {
+		@apply bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent;
+	}
+
+	/* FIXED — NO INVALID @apply hover: classes */
+	.card-hover {
+		@apply transition-all duration-300;
+	}
+
+	.card-hover:hover {
+		@apply scale-105 shadow-xl shadow-primary/10;
+	}
+}
+
+/* --------------------------- THEME ROUNDING MAP --------------------------- */
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	--radius-sm: calc(var(--radius) - 4px);
+	--radius-md: calc(var(--radius) - 2px);
+	--radius-lg: var(--radius);
+	--radius-xl: calc(var(--radius) + 4px);
 }
